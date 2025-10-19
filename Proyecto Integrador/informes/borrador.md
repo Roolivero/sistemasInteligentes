@@ -74,3 +74,9 @@ Dos individuos pueden tener distancias numéricas similares pero pertenecer a co
 Por eso, la consigna pide que más adelante implementes la distancia de Gower y el AgglomerativeClustering,
 porque Gower sí puede manejar variables mixtas (numéricas, ordinales y categóricas), corrigiendo esta limitación de K-means.
 
+
+## 2. Gowe
+
+### Obs
+Cuanto menor sea la distancia, más probable es que ambos individuos pertenezcan al mismo cluster o grupo de características similares.
+

@@ -75,8 +75,7 @@ Por eso, la consigna pide que más adelante implementes la distancia de Gower y 
 porque Gower sí puede manejar variables mixtas (numéricas, ordinales y categóricas), corrigiendo esta limitación de K-means.
 
 
-## 2. Gowe
+## 2. Gower
 
 ### Obs
 Cuanto menor sea la distancia, más probable es que ambos individuos pertenezcan al mismo cluster o grupo de características similares.
-

@@ -115,131 +115,34 @@ La mayoría de los individuos (75,92%) percibe ingresos anuales iguales o inferi
 #### 1.4.2 Características Socioeconómicas
 
 **Clase de Trabajo (workclass):**
-- Private: 75,34% (24.532 individuos)
-- Self-emp-not-inc: 7,80% (2.541 individuos)
-- Local-gov: 6,43% (2.093 individuos)
-- State-gov: 3,99% (1.298 individuos)
-- Self-emp-inc: 3,43% (1.116 individuos)
-- Federal-gov: 2,95% (960 individuos)
-- Without-pay: 0,04% (14 individuos)
-- Never-worked: 0,02% (7 individuos)
 
 En términos ocupacionales, la mayoría de los individuos trabaja en el sector privado (75,34%), seguido por los autoempleados (7,80%) y empleados de gobiernos locales o estatales. Esto sugiere una estructura laboral concentrada en el ámbito privado con participación limitada del sector público.
 
 **Nivel Educativo (education):**
-- HS-grad: 32,25% (10.501 individuos)
-- Some-college: 22,39% (7.291 individuos)
-- Bachelors: 16,45% (5.355 individuos)
-- Masters: 5,29% (1.723 individuos)
-- Assoc-voc: 4,24% (1.382 individuos)
-- 11th: 3,61% (1.175 individuos)
-- Assoc-acdm: 3,28% (1.067 individuos)
-- 10th: 2,87% (933 individuos)
-- 7th-8th: 1,98% (646 individuos)
-- Prof-school: 1,77% (576 individuos)
-- 9th: 1,58% (514 individuos)
-- 12th: 1,33% (433 individuos)
-- Doctorate: 1,27% (413 individuos)
-- 5th-6th: 1,02% (333 individuos)
-- 1st-4th: 0,52% (168 individuos)
-- Preschool: 0,16% (51 individuos)
 
 Los resultados evidencian que los niveles educativos más frecuentes corresponden a HS-grad (32,25%) y Some-college (22,39%), lo cual refleja que una gran proporción de la población completó la educación secundaria o cursó parcialmente estudios superiores.
 Los niveles universitarios y de posgrado (Bachelors, Masters, Doctorate) son minoritarios, aunque, como se analizará posteriormente, estos grupos presentan una mayor proporción de ingresos altos, confirmando la relevancia de la educación como factor socioeconómico.
 
 **Estado Civil (marital_status):**
-- Married-civ-spouse: 46,00% (14.976 individuos)
-- Never-married: 32,81% (10.683 individuos)
-- Divorced: 13,64% (4.443 individuos)
-- Separated: 3,15% (1.025 individuos)
-- Widowed: 3,05% (993 individuos)
-- Married-spouse-absent: 1,28% (418 individuos)
-- Married-AF-spouse: 0,07% (23 individuos)
 
 La estructura marital revela que el 46% de los individuos está casado con cónyuge presente, seguido por quienes nunca se casaron (32,81%) y los divorciados (13,64%). En conjunto, estas tres categorías agrupan más del 90% de la muestra, lo que sugiere una población predominantemente casada o soltera, con menor representación de personas separadas o viudas.
 
 **Ocupación (occupation):**
-- Prof-specialty: 18,37% (5.983 individuos)
-- Craft-repair: 12,59% (4.099 individuos)
-- Exec-managerial: 12,49% (4.066 individuos)
-- Adm-clerical: 11,58% (3.770 individuos)
-- Sales: 11,21% (3.650 individuos)
-- Other-service: 10,12% (3.295 individuos)
-- Machine-op-inspct: 6,15% (2.002 individuos)
-- Transport-moving: 4,90% (1.597 individuos)
-- Handlers-cleaners: 4,21% (1.370 individuos)
-- Farming-fishing: 3,05% (994 individuos)
-- Tech-support: 2,85% (928 individuos)
-- Protective-serv: 1,99% (649 individuos)
-- Priv-house-serv: 0,46% (149 individuos)
-- Armed-Forces: 0,03% (9 individuos)
 
 La distribución ocupacional muestra una diversificación moderada del mercado laboral. Las categorías más frecuentes son profesiones especializadas (18,37%), trabajos técnicos o de reparación (12,59%) y puestos ejecutivos o administrativos (12,49%).
 Esto sugiere una estructura laboral con predominio de ocupaciones calificadas y técnicas, aunque también se observa participación de sectores de servicios y tareas manuales.
 
 
 **Relación Familiar (relationship):**
-- Husband: 40,51% (13.193 individuos)
-- Not-in-family: 25,50% (8.305 individuos)
-- Own-child: 15,56% (5.068 individuos)
-- Unmarried: 10,58% (3.446 individuos)
-- Wife: 4,82% (1.568 individuos)
-- Other-relative: 3,01% (981 individuos)
 
 La estructura familiar se caracteriza por una mayor proporción de jefes de hogar masculinos (Husband, 40,51%), seguida por individuos que no pertenecen a un núcleo familiar (25,50%) y por hijos dentro del hogar (15,56%).
 Estos datos reflejan una muestra compuesta principalmente por adultos casados y cabezas de familia, lo cual puede relacionarse con los patrones de ingresos y empleo observados.
 
 **Raza (race):**
-- White: 85,50% (27.834 individuos)
-- Black: 9,60% (3.125 individuos)
-- Asian-Pac-Islander: 2,85% (927 individuos)
-- Amer-Indian-Eskimo: 0,94% (305 individuos)
-- Other: 1,11% (370 individuos)
 
 La composición racial del conjunto de datos está dominada por individuos de raza blanca (85,50%), seguidos por personas de raza negra (9,60%) y asiáticas o isleñas del Pacífico (2,85%). Esta distribución es coherente con la estructura demográfica de Estados Unidos en el período de referencia (1994).
 
 **País de Origen (native_country):**
-- United-States: 89,60% (29.175 individuos)
-- Mexico: 1,93% (629 individuos)
-- Philippines: 0,93% (302 individuos)
-- Germany: 0,50% (162 individuos)
-- Canada: 0,42% (137 individuos)
-- Puerto-Rico: 0,40% (129 individuos)
-- El-Salvador: 0,37% (120 individuos)
-- India: 0,36% (118 individuos)
-- Cuba: 0,35% (115 individuos)
-- England: 0,33% (108 individuos)
-- Jamaica: 0,32% (103 individuos)
-- South: 0,30% (98 individuos)
-- China: 0,29% (95 individuos)
-- Italy: 0,28% (90 individuos)
-- Dominican-Republic: 0,26% (85 individuos)
-- Vietnam: 0,25% (82 individuos)
-- Guatemala: 0,24% (78 individuos)
-- Japan: 0,24% (77 individuos)
-- Poland: 0,23% (75 individuos)
-- Columbia: 0,22% (72 individuos)
-- Taiwan: 0,22% (71 individuos)
-- Haiti: 0,21% (69 individuos)
-- Iran: 0,21% (68 individuos)
-- Portugal: 0,20% (66 individuos)
-- Nicaragua: 0,19% (62 individuos)
-- Peru: 0,19% (61 individuos)
-- France: 0,18% (59 individuos)
-- Greece: 0,18% (58 individuos)
-- Ecuador: 0,17% (56 individuos)
-- Ireland: 0,17% (55 individuos)
-- Hong: 0,16% (52 individuos)
-- Cambodia: 0,15% (49 individuos)
-- Trinadad&Tobago: 0,15% (48 individuos)
-- Laos: 0,14% (46 individuos)
-- Thailand: 0,14% (45 individuos)
-- Yugoslavia: 0,14% (45 individuos)
-- Outlying-US(Guam-USVI-etc): 0,13% (42 individuos)
-- Hungary: 0,12% (39 individuos)
-- Honduras: 0,12% (38 individuos)
-- Scotland: 0,11% (36 individuos)
-- Holand-Netherlands: 0,10% (33 individuos)
 
 La mayoría de los individuos nació en los Estados Unidos (89,60%), mientras que el resto se distribuye entre diversos países de América Latina, Asia y Europa, como México (1,93%), Filipinas (0,93%), Alemania (0,50%) y Canadá (0,42%), entre otros.
 Esta diversidad geográfica pone de manifiesto el carácter multicultural de la sociedad estadounidense, aunque con predominio de población nativa.
@@ -291,42 +194,90 @@ Se consideraron todas las variables del dataset excepto `fnlwgt`, clasificándol
 
 #### 1.7.2 ¿Qué impacto tienen los valores faltantes en K-means?
 
-Los valores faltantes tienen un impacto negativo directo en K-means porque:
-
-1. **Incompatibilidad algorítmica:** K-means no puede operar con datos incompletos, ya que requiere calcular distancias euclidianas entre todos los puntos.
-
-2. **Distorsión de centroides:** Los valores faltantes pueden sesgar la ubicación de los centroides, afectando la calidad del clustering.
-
-3. **Pérdida de información:** Eliminar filas con valores faltantes reduce el tamaño de la muestra y puede introducir sesgos de selección.
-
-4. **Estrategias de tratamiento:** Se implementó rellenado con moda para variables categóricas, preservando la integridad del dataset.
+Los valores faltantes afectan negativamente el desempeño de K-means debido a que el algoritmo no puede operar con datos incompletos, ya que requiere calcular distancias euclidianas entre todos los registros. Su presencia puede distorsionar los centroides y reducir la calidad del clustering.
+Eliminar observaciones con valores nulos implica una pérdida de información y potencial sesgo de selección. Por ello, se aplicó imputación mediante la moda en las variables categóricas, manteniendo la coherencia y completitud del conjunto de datos.
 
 #### 1.7.3 ¿Qué limitación supone ignorar las variables categóricas?
 
-Ignorar las variables categóricas en K-means presenta las siguientes limitaciones:
-
-1. **Pérdida de información semántica:** Variables como marital_status, workclass y education aportan contexto socioeconómico crucial.
-
-2. **Clusters incompletos:** Personas con perfiles socioeconómicos muy distintos pueden agruparse incorrectamente si sus valores numéricos son similares.
-
-3. **Interpretación limitada:** Los clusters resultantes no reflejan patrones sociolaborales o educativos, que son fundamentales en el dataset Adult.
-
-4. **Distancia no representativa:** La distancia euclidiana entre variables numéricas no captura la "realidad social" de las diferencias categóricas.
-
-5. **Justificación metodológica:** Esta limitación justifica la implementación posterior de la distancia de Gower y AgglomerativeClustering, que pueden manejar variables mixtas.
+Ignorar las variables categóricas en K-means implica una pérdida significativa de información semántica, especialmente en atributos socioeconómicos como marital_status, workclass o education.
+Esto puede derivar en clusters incompletos o poco representativos, donde individuos con perfiles diferentes se agrupan por similitudes numéricas superficiales.
+Dado que la distancia euclidiana no refleja adecuadamente las diferencias entre categorías, se justifica el uso de métodos alternativos como la distancia de Gower y Agglomerative Clustering, que permiten integrar variables mixtas en el análisis.
 
 ### 1.8 Conclusiones del Análisis Descriptivo
 
-El análisis estadístico descriptivo del dataset Adult Census revela un conjunto de datos bien estructurado con características demográficas y socioeconómicas diversas. Los principales hallazgos incluyen:
+El análisis descriptivo del dataset Adult Census evidencia un conjunto de datos estructurado y representativo, con diversidad demográfica y socioeconómica. Se observa una marcada desigualdad de ingresos, dado que solo el 24,08% de los individuos percibe más de 50.000 dólares anuales, concentrándose la mayoría en niveles bajos y medios. Asimismo, se identifican diferencias significativas por género: los hombres tienen 2,8 veces más probabilidades que las mujeres de superar dicho umbral de ingresos. La educación surge como un factor determinante, ya que los niveles académicos más altos —Doctorate, Prof-school y Masters— presentan una mayor proporción de individuos con ingresos elevados. En términos económicos, las variables capital_gain y capital_loss muestran alta variabilidad y predominio de valores nulos, reflejando una participación desigual en actividades de inversión o pérdidas de capital. Finalmente, la calidad del dataset es adecuada, con un 7,37% de valores faltantes, lo que permite aplicar estrategias de limpieza sin comprometer la representatividad de la muestra. En conjunto, estos resultados constituyen una base sólida para la aplicación de técnicas de clustering, como K-means y aquellas basadas en la distancia de Gower, orientadas a identificar perfiles y patrones socioeconómicos dentro de la población analizada.
 
-1. **Distribución desigual de ingresos:** Solo el 24.08% de la población gana más de $50K, reflejando desigualdades socioeconómicas.
+---
 
-2. **Desigualdades de género:** Existe una marcada brecha salarial, donde los hombres tienen 2.8 veces más probabilidades de ganar >50K que las mujeres.
+## 2. Implementación y Evaluación de la Distancia de Gower
 
-3. **Importancia de la educación:** Se observa una correlación clara entre nivel educativo e ingresos, siendo los niveles superiores (Doctorate, Prof-school, Masters) los que presentan mayores probabilidades de altos ingresos.
+### 2.1 Procesamiento de Variables según Tipo
 
-4. **Variabilidad en variables numéricas:** Las variables capital_gain y capital_loss presentan alta variabilidad con muchos valores en cero, sugiriendo que no todos los individuos tienen inversiones de capital.
+Previo al cálculo de la distancia de Gower, se realizó una selección y tratamiento diferenciado de las variables del dataset.
+Se excluyeron aquellas que no aportan información útil o podrían generar redundancia en el análisis:
 
-5. **Calidad de los datos:** El dataset presenta una estructura sólida con valores faltantes manejables (7.37% total), permitiendo implementar estrategias de limpieza efectivas.
+fnlwgt: representa un peso estadístico sin relevancia interpretativa directa para el clustering.
 
-Estos resultados establecen las bases metodológicas necesarias para la implementación posterior del algoritmo K-means y otras técnicas de clustering, proporcionando una comprensión profunda de las características del dataset que guiará las decisiones técnicas en las siguientes fases del proyecto.
+education_num: se eliminó por duplicar la información de education, ya que esta última fue normalizada mediante label encoding y ambas variables representarían el mismo concepto educativo.
+
+income: al ser la variable objetivo del dataset, no se incluye en un análisis no supervisado, ya que su incorporación forzaría al algoritmo a agrupar según la respuesta final, anulando la exploración de patrones naturales.
+
+Las variables numéricas (age, capital_gain, capital_loss, hours_per_week) se normalizaron mediante el método min–max, transformando sus valores al rango [0,1]. Esto garantiza comparabilidad entre atributos de diferentes escalas y evita que una variable con magnitudes elevadas domine el cálculo de disimilitud.
+
+La variable education, de tipo ordinal, se codificó respetando el orden natural de los niveles educativos y luego se normalizó también en el rango [0,1], asegurando una contribución proporcional a la distancia total.
+
+En cuanto a las variables categóricas nominales (workclass, marital_status, occupation, relationship, race, native_country), no se normalizan ni se codifican numéricamente. En la distancia de Gower se comparan por igualdad o diferencia: si dos observaciones comparten el mismo valor (por ejemplo, el mismo estado civil), la distancia en esa variable es 0; si difieren, la distancia es 1.
+
+Por último, la variable sex, considerada binaria simétrica, asigna igual peso a ambas categorías (Male/Female) dentro del cálculo.
+
+Este procesamiento integral permitió que cada tipo de variable aportara de manera equilibrada a la medida de disimilitud, preservando el significado semántico de los datos y evitando redundancias o sesgos en el análisis.
+
+### 2.3 Implementación y Validación
+
+Durante la validación con un subconjunto reducido de seis registros, la matriz de distancias obtenida cumplió con las propiedades esperadas: simetría, diagonal nula y valores dentro del rango [0,1].
+Los resultados reflejaron coherencia semántica: las observaciones con características similares presentaron distancias bajas, mientras que aquellas con perfiles contrastantes mostraron distancias altas.
+
+Los valores de distancia muestran coherencia semántica: individuos con características similares presentan distancias bajas (0.1779-0.2262), mientras que perfiles muy diferentes exhiben distancias altas (0.3451-0.4357).
+
+### 2.4 Análisis de Matrices de Distancias
+
+Al calcular la matriz completa para una muestra de 200 observaciones, se obtuvo una distribución de distancias con media 0.341 y desviación estándar 0.12, concentrada mayormente entre 0.25 y 0.45.
+Esto indica que la mayoría de los individuos presenta diferencias moderadas entre sí, con una dispersión que refleja la diversidad sociodemográfica del conjunto.
+La comparación con el dataset original (que incluía valores faltantes) mostró resultados prácticamente idénticos, confirmando la estabilidad del método.
+
+### 2.5 Comparación: Dataset Limpio vs Con Faltantes
+
+#### 2.5.1 Análisis Estadístico Comparativo
+
+La comparación entre ambas matrices reveló diferencias mínimas pero estadísticamente significativas:
+
+**Diferencias en las Medidas Centrales:**
+- **Diferencia en la media:** 0.0021 (0.62% de la media del dataset limpio)
+- **Diferencia en la mediana:** 0.0013 (0.37% de la mediana del dataset limpio)
+- **Diferencia en la desviación estándar:** -0.0031 (-2.59% de la desviación estándar del dataset limpio)
+
+**Correlación entre Matrices:**
+La correlación de Pearson entre las dos matrices fue de 0.9834, indicando una relación muy fuerte y confirmando que el manejo de valores faltantes por parte de la distancia de Gower preserva la estructura fundamental de las relaciones entre observaciones.
+
+#### 2.5.2 Análisis de Casos Extremos
+
+**Diferencias Significativas:**
+- **Mayor diferencia absoluta:** 0.1770 (1.34% de los pares)
+- **Diferencias > 0.1:** 267 de 19,900 pares (1.34%)
+- **Rango de diferencias:** [-0.1065, 0.1770]
+
+El análisis de casos extremos reveló que solo el 1.34% de los pares de observaciones presentó diferencias significativas (>0.1) entre las dos versiones del dataset. Esto confirma la robustez de la distancia de Gower ante la presencia de valores faltantes.
+
+### 2.6 Interpretación de Resultados
+
+La distribución de las distancias muestra que la mayoría de los individuos poseen perfiles socioeconómicos moderadamente similares, con valores medios alrededor de 0.35.
+Las distancias más bajas (<0.2) representan grupos homogéneos, posiblemente asociados a perfiles laborales o educativos similares, mientras que las más altas (>0.6) reflejan subpoblaciones con diferencias marcadas, coherentes con las desigualdades observadas en el análisis descriptivo.
+La comparación entre datasets confirma que la distancia de Gower preserva la coherencia estructural y semántica de los datos, incluso cuando existen ausencias parciales en algunas variables.
+
+### 2.7 Conclusiones del Ejercicio 2
+
+La aplicación de la distancia de Gower al dataset Adult Census demostró su eficacia y estabilidad como medida de disimilitud para datos mixtos.
+El procedimiento implementado permitió incorporar todas las variables disponibles, manejando correctamente tanto la diversidad de tipos de datos como la presencia de valores faltantes.
+Las matrices de distancias obtenidas fueron coherentes, simétricas y estadísticamente consistentes, evidenciando que Gower preserva la estructura relacional del conjunto.
+En consecuencia, esta implementación proporciona una base metodológica sólida para el uso posterior de algoritmos de clustering como Agglomerative Clustering, posibilitando agrupaciones más representativas e interpretables de los patrones socioeconómicos presentes en la población analizada.
+

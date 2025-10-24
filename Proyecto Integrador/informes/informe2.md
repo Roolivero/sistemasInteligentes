@@ -1,9 +1,5 @@
 # PROYECTO DE AGRUPAMIENTO 
 
-## Tema: Implementación y evaluación de clustering con el algoritmo K-means en el dataset Adult (UCI Census Income)
-
----
-
 ## 1. Análisis Estadístico Descriptivo del Dataset Adult Census
 
 ### 1.1 Introducción y Contexto

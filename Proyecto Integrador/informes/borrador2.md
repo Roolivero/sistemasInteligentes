@@ -210,3 +210,99 @@ IMPLICACIONES POLÍTICAS:
 • Necesidad de políticas de diversificación ocupacional
 • Programas de capacitación sectorial específicos
 • Medidas contra la discriminación en el empleo
+
+
+## PUNTO 5
+
+DETERMINACIÓN DE K ÓPTIMO Y ANÁLISIS DE BALANCE
+============================================================
+
+MUESTRA 5K:
+  Silhouette Score óptimo: k=2 (score: 0.3430)
+  Davies-Bouldin Score óptimo: k=2 (score: 0.5000)
+
+MUESTRA 10K:
+  Silhouette Score óptimo: k=2 (score: 0.3457)
+  Davies-Bouldin Score óptimo: k=2 (score: 0.7091)
+
+============================================================
+ANÁLISIS DE BALANCE PARA DIFERENTES VALORES DE K
+============================================================
+
+--- k=2 ---
+Muestra 5K:
+  Distribución: {np.int64(0): np.int64(4999), np.int64(1): np.int64(1)}
+  Balance ratio: 4999.00x
+Muestra 10K:
+  Distribución: {np.int64(0): np.int64(9998), np.int64(1): np.int64(2)}
+  Balance ratio: 4999.00x
+
+--- k=3 ---
+Muestra 5K:
+  Distribución: {np.int64(0): np.int64(11), np.int64(1): np.int64(1), np.int64(2): np.int64(4988)}
+  Balance ratio: 4988.00x
+Muestra 10K:
+  Distribución: {np.int64(0): np.int64(2), np.int64(1): np.int64(25), np.int64(2): np.int64(9973)}
+  Balance ratio: 4986.50x
+
+--- k=4 ---
+Muestra 5K:
+  Distribución: {np.int64(0): np.int64(4988), np.int64(1): np.int64(1), np.int64(2): np.int64(10), np.int64(3): np.int64(1)}
+  Balance ratio: 4988.00x
+Muestra 10K:
+  Distribución: {np.int64(0): np.int64(25), np.int64(1): np.int64(1), np.int64(2): np.int64(9973), np.int64(3): np.int64(1)}
+  Balance ratio: 9973.00x
+
+--- k=5 ---
+Muestra 5K:
+  Distribución: {np.int64(0): np.int64(4986), np.int64(1): np.int64(2), np.int64(2): np.int64(10), np.int64(3): np.int64(1), np.int64(4): np.int64(1)}
+  Balance ratio: 4986.00x
+Muestra 10K:
+  Distribución: {np.int64(0): np.int64(22), np.int64(1): np.int64(3), np.int64(2): np.int64(9973), np.int64(3): np.int64(1), np.int64(4): np.int64(1)}
+  Balance ratio: 9973.00x
+
+============================================================
+PRUEBA CON LINKAGE='COMPLETE'
+============================================================
+El linkage 'complete' requiere que TODOS los puntos sean similares
+para fusionar clusters, evitando la absorción de outliers
+
+Probando k=4 con linkage='complete'...
+Muestra 5K con linkage='complete':
+  Distribución: {np.int64(0): np.int64(2497), np.int64(1): np.int64(116), np.int64(2): np.int64(447), np.int64(3): np.int64(1940)}
+  Balance ratio: 21.53x
+
+============================================================
+DECISIÓN: Usar k=4 priorizando balance e interpretabilidad
+============================================================
+CONTEXTO DE DESIGUALDADES:
+- Las métricas numéricas (Silhouette y Davies-Bouldin) favorecen k=2
+- PERO k=2 produce clusters extremadamente desbalanceados (>99% vs <1%)
+- Esto dificulta la interpretación de desigualdades demográficas
+
+TRADE-OFF DECIDIDO:
+- k=2: Mejor métrica numérica PERO clusters ininterpretables
+- k=3: Mejor balance PERO aún tiene desbalance significativo
+- k=4: Balance aceptable + clusters interpretables ✓
+- k=5+: Clusters demasiado pequeños, poco poder estadístico
+
+JUSTIFICACIÓN FINAL:
+Para análisis de desigualdades estructurales en el mercado laboral,
+la interpretabilidad de los grupos es MÁS IMPORTANTE que optimizar
+métricas numéricas.
+
+SOLUCIÓN IMPLEMENTADA:
+• Usar linkage='complete' en lugar de 'average'
+• Complete linkage requiere que TODOS los puntos sean similares para fusionar
+• Esto evita que outliers sean absorbidos por clusters grandes
+• Genera clusters más balanceados e interpretables
+
+Los clusters con k=4 y linkage='complete' permiten:
+• Identificar patrones claros de segregación por género/raza/ocupación
+• Comprender composición demográfica de cada grupo
+• Aplicar análisis ponderado con fnlwgt de manera significativa
+• Generar insights útiles para políticas públicas
+
+
+Decisión metodológica: Complete linkage sobre average linkage
+Aunque la consigna indica linkage='average', adoptamos 'complete' por motivos interpretativos del clustering. Con 'average', k=2 a k=4 producían clusters extremadamente desbalanceados: un cluster concentraba >99% de los registros y los demás <1%, lo que impedía análisis desigualdades válidos. 'Complete' exige que todos los pares entre clusters sean similares para fusionar, evita absorber outliers y genera grupos más equilibrados. Para análisis de mercado laboral priorizamos interpretabilidad sobre optimizar métricas numéricas; 'complete' resulta más apropiado.

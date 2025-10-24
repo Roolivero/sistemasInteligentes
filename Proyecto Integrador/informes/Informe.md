@@ -281,3 +281,187 @@ El procedimiento implementado permitió incorporar todas las variables disponibl
 Las matrices de distancias obtenidas fueron coherentes, simétricas y estadísticamente consistentes, evidenciando que Gower preserva la estructura relacional del conjunto.
 En consecuencia, esta implementación proporciona una base metodológica sólida para el uso posterior de algoritmos de clustering como Agglomerative Clustering, posibilitando agrupaciones más representativas e interpretables de los patrones socioeconómicos presentes en la población analizada.
 
+---
+
+## 3. Análisis de Escalabilidad con Distancia de Gower
+
+### 3.1 Metodología Experimental
+
+Se seleccionaron dos subconjuntos aleatorios del dataset Adult Census, de 5.000 y 10.000 registros, utilizando la misma semilla de aleatoriedad.
+Ambas muestras se procesaron con el mismo pretratamiento: normalización min–max para variables numéricas, codificación ordinal para la variable education, tratamiento binario simétrico para sex y comparación por igualdad para las variables categóricas nominales. Los valores faltantes se completaron mediante imputación con la moda, asegurando consistencia entre las muestras.
+
+### 3.3 Resultados Experimentales
+
+**Escalabilidad Computacional**
+
+Los resultados mostraron una correspondencia casi exacta entre el tiempo y el consumo de memoria observados y los valores teóricos esperados.
+Al duplicar el tamaño de la muestra (de 5K a 10K), el tiempo de ejecución aumentó 4.03 veces y el uso de memoria 4.00 veces, coincidiendo con el comportamiento cuadrático teórico.
+Esto demuestra que la implementación híbrida mantiene una eficiencia óptima tanto en tiempo como en recursos, alcanzando valores de eficiencia entre 0.99 y 1.00.
+
+**Estabilidad de Clusters**
+
+El análisis de estabilidad arrojó resultados altamente consistentes entre ambas muestras.
+En los dos casos, el número óptimo de clusters fue k = 2, con coeficientes de silueta muy similares (0.2869 para 5K y 0.2997 para 10K).
+La diferencia entre ambos (0.0128) está muy por debajo del umbral de estabilidad (0.05), lo que confirma que la distancia de Gower identifica estructuras estables y reproducibles en los datos.
+
+**Trade-offs Computacionales**
+
+Si bien la implementación es eficiente, el crecimiento cuadrático impone limitaciones prácticas.
+Una muestra de 10K registros requiere aproximadamente 40 minutos de procesamiento y 800 MB de memoria, lo que establece un límite operativo razonable.
+Por encima de 20K registros, se vuelve necesario recurrir a técnicas de escalado para mantener tiempos y recursos aceptables.
+
+---
+
+## 4. Implementación y Evaluación del Algoritmo K-means
+
+### 4.1 Metodología y Configuración Experimental
+
+Para la aplicación del algoritmo K-means se seleccionaron cinco variables numéricas del dataset Adult Census: `age, education_num, capital_gain, capital_loss y hours_per_week`.
+Dado que K-means utiliza la distancia euclidiana como medida de similitud, las variables deben estar en una escala comparable para evitar que aquellas con valores más grandes dominen el proceso de agrupamiento. Por ello, se implementó una estrategia de normalización diferenciada, adaptada a la distribución de cada variable.
+
+Las variables `age` y `hours_per_week` presentan distribuciones relativamente simétricas y con baja presencia de valores extremos. En estos casos se aplicó StandardScaler, una técnica que centra los datos en torno a su media y los escala según la desviación estándar. Esta normalización mantiene la forma de la distribución original y asegura que ambas variables contribuyan de manera equilibrada al cálculo de distancias sin distorsionar su variabilidad natural.
+
+Por otro lado, las variables education_num, capital_gain y capital_loss mostraron distribuciones marcadamente sesgadas y con valores atípicos significativos. Para ellas se utilizó MinMaxScaler, que transforma los datos al rango [0,1]. Este método es más adecuado para distribuciones no normales, ya que comprime los valores extremos y evita que los outliers afecten la ubicación de los centroides. En particular, capital_gain y capital_loss contienen una gran cantidad de ceros y pocos valores muy altos, por lo que su normalización mediante MinMax resultó esencial para mantener la estabilidad del algoritmo.
+
+Esta combinación de enfoques —StandardScaler para variables con distribución normal y MinMaxScaler para variables sesgadas o con outliers— permitió equilibrar la contribución de todas las variables, mejorando la precisión del cálculo de distancias y, por consiguiente, la calidad del clustering. La estrategia híbrida aplicada optimizó el rendimiento de K-means al garantizar que cada variable representara de manera justa su peso informativo dentro de los grupos formados.
+
+### 4.2 Determinación del Número Óptimo de Clusters
+
+Los resultados mostraron una convergencia notable entre las métricas de Silhoutte y Davies Bouldin:
+
+**Muestra de 5.000 registros:**
+- K óptimo según Silhouette: 5 clusters (score: 0.4157)
+- K óptimo según Davies-Bouldin: 5 clusters (score: 0.7770)
+
+**Muestra de 10.000 registros:**
+- K óptimo según Silhouette: 5 clusters (score: 0.4168)
+- K óptimo según Davies-Bouldin: 5 clusters (score: 0.7750)
+
+La coincidencia entre ambas métricas y la estabilidad entre muestras de diferente tamaño confirma la robustez de la solución k=5 como número óptimo de clusters.
+
+### 4.3 Análisis de Estabilidad y Escalabilidad
+
+**Estabilidad Entre Muestras**
+
+El análisis de estabilidad reveló resultados altamente consistentes:
+- **K óptimo estable**: Ambas muestras convergieron en k=5
+- **Diferencias mínimas en métricas**: Las diferencias en Silhouette Score (0.0011) y Davies-Bouldin Index (0.0020) están muy por debajo de umbrales de significancia
+- **Consistencia metodológica**: La estabilidad confirma que los patrones identificados son inherentes a la estructura de los datos, no artefactos del tamaño muestral
+
+**Análisis de Escalabilidad Computacional**
+
+La evaluación de escalabilidad mostró un comportamiento computacional eficiente:
+- **Factor de escalado temporal**: 2.12x al duplicar el tamaño de muestra
+- **Tiempo promedio**: 0.04s (5K) vs 0.08s (10K)
+- **Comportamiento sub-lineal**: El factor de escalado (2.12x) es menor que el teórico (4x), indicando eficiencia computacional
+
+### 4.4 Interpretación de Patrones en los Clusters
+
+**Caracterización de los Clusters Identificados**
+
+El análisis de los cinco clusters óptimos reveló patrones socioeconómicos distintivos:
+
+**Cluster 0 - Perfil de Adultos Mayores con Ingresos Bajos:**
+- Edad promedio: 64.8 años
+- Educación promedio: 9.3 años
+- Horas/semana: 19.2 (jornada reducida)
+- % Income >50K: 11.3%
+- Interpretación: Representa adultos mayores con menor actividad laboral y bajos ingresos
+
+**Cluster 1 - Perfil de Jóvenes con Ingresos Muy Bajos:**
+- Edad promedio: 23.6 años
+- Educación promedio: 9.3 años
+- Horas/semana: 21.1 (empleos de tiempo parcial)
+- % Income >50K: 1.8%
+- Interpretación: Jóvenes en etapas tempranas de carrera laboral con ingresos mínimos
+
+**Cluster 2 - Perfil de Adultos Maduros con Ingresos Moderados:**
+- Edad promedio: 50.6 años
+- Educación promedio: 10.2 años
+- Horas/semana: 41.7 (jornada completa)
+- % Income >50K: 37.1%
+- Interpretación: Adultos en plena actividad laboral con ingresos medios-altos
+
+**Cluster 3 - Perfil de Trabajadores Intensivos con Ingresos Altos:**
+- Edad promedio: 40.6 años
+- Educación promedio: 10.9 años
+- Horas/semana: 63.7 (jornada extendida)
+- % Income >50K: 43.0%
+- Interpretación: Profesionales con alta dedicación laboral y mejores ingresos
+
+**Cluster 4 - Perfil de Adultos Jóvenes con Ingresos Moderados:**
+- Edad promedio: 30.1 años
+- Educación promedio: 10.1 años
+- Horas/semana: 41.7 (jornada completa)
+- % Income >50K: 17.7%
+- Interpretación: Adultos jóvenes en desarrollo profesional con ingresos medios
+
+### 4.5 Limitaciones del Enfoque K-means
+
+**Pérdida de Información por Variables Categóricas**
+
+El análisis exclusivo de variables numéricas conlleva limitaciones significativas:
+
+**Variables Excluidas:**
+- `workclass`: Tipo de empleador (público/privado)
+- `education`: Nivel educativo categórico
+- `marital_status`: Estado civil
+- `occupation`: Ocupación específica
+- `relationship`: Relación familiar
+- `race`: Origen étnico
+- `sex`: Género
+- `native_country`: País de origen
+
+**Impacto en la Calidad del Clustering:**
+- **Pérdida de ~60% de la información disponible** en el dataset
+- **Clusters menos interpretables** desde una perspectiva socioeconómica
+- **Separación menos precisa** entre grupos demográficos
+- **Pérdida de patrones importantes** relacionados con género, raza y ocupación
+
+**Comparación con Distancia de Gower**
+
+La comparación con los resultados obtenidos mediante distancia de Gower (ejercicios anteriores) evidencia las limitaciones del enfoque K-means:
+- **Gower**: Maneja variables mixtas, preservando información categórica
+- **K-means**: Solo variables numéricas, perdiendo contexto socioeconómico
+- **Gower**: Clusters más interpretables y socialmente relevantes
+- **K-means**: Clusters basados únicamente en similitudes numéricas
+
+### 4.6 Respuestas a las Preguntas Guía
+
+**¿Qué criterios usaste para definir el número de clusters?**
+
+Se emplearon criterios múltiples y complementarios:
+1. **Silhouette Score**: Maximización para obtener mejor separación inter-cluster y cohesión intra-cluster
+2. **Davies-Bouldin Index**: Minimización para optimizar la relación dispersión/separación
+3. **Estabilidad entre muestras**: Consistencia de resultados entre muestras de 5K y 10K registros
+4. **Interpretabilidad**: Capacidad de explicar los clusters encontrados desde una perspectiva socioeconómica
+
+La convergencia de ambos criterios en k=5, junto con la estabilidad entre muestras, proporcionó una base sólida para la decisión final.
+
+**¿Qué patrones observaste en los clusters formados?**
+
+Los clusters revelaron una estratificación socioeconómica clara basada en:
+- **Diferenciación por edad**: Desde jóvenes (23.6 años) hasta adultos mayores (64.8 años)
+- **Separación por nivel educativo**: Rango de 9.3 a 10.9 años de educación
+- **Agrupación por patrones laborales**: Desde empleos de tiempo parcial (19.2h) hasta jornadas extendidas (63.7h)
+- **Correlación con ingresos**: Porcentajes de income >50K desde 1.8% hasta 43.0%
+
+Los patrones identificados reflejan la estructura socioeconómica típica, donde la edad, educación y dedicación laboral se correlacionan con los niveles de ingreso.
+
+**¿Qué limitaciones tiene K-means al ignorar las variables categóricas?**
+
+Las limitaciones principales incluyen:
+1. **Pérdida masiva de información**: Exclusión de 8 variables categóricas relevantes
+2. **Clusters menos representativos**: Agrupaciones basadas únicamente en similitudes numéricas
+3. **Pérdida de contexto social**: Ausencia de información sobre género, raza, ocupación y estado civil
+4. **Interpretabilidad reducida**: Dificultad para explicar los clusters desde una perspectiva socioeconómica integral
+5. **Sesgo metodológico**: La distancia euclidiana no refleja adecuadamente las diferencias entre categorías
+
+### 4.7 Conclusiones del Ejercicio 4
+
+La implementación de K-means en el dataset Adult Census demostró la efectividad del algoritmo para identificar patrones socioeconómicos basados en variables numéricas, revelando una estructura de cinco clusters estables y reproducibles. Los resultados mostraron una clara estratificación por edad, educación y patrones laborales, con correlaciones evidentes con los niveles de ingreso.
+
+Sin embargo, el análisis también evidenció las limitaciones inherentes del enfoque K-means cuando se aplica exclusivamente a variables numéricas. La pérdida de información categórica representa una limitación significativa que reduce la capacidad interpretativa y la relevancia social de los clusters obtenidos.
+
+La comparación con los resultados de la distancia de Gower (ejercicios anteriores) confirma que el análisis integral de variables mixtas proporciona una comprensión más completa y socialmente relevante de los patrones socioeconómicos presentes en la población. Por tanto, mientras K-means constituye una herramienta valiosa para análisis exploratorios de variables numéricas, su aplicación debe complementarse con técnicas que permitan la integración de variables categóricas para obtener una visión integral de los fenómenos socioeconómicos analizados.
+

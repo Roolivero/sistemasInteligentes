@@ -424,6 +424,22 @@ unicode = ["unicodedata2 (>=15.1.0) ; python_version <= \"3.12\""]
 woff = ["brotli (>=1.0.1) ; platform_python_implementation == \"CPython\"", "brotlicffi (>=0.8.0) ; platform_python_implementation != \"CPython\"", "zopfli (>=0.1.4)"]
 
 [[package]]
+name = "gower"
+version = "0.1.2"
+description = "Python implementation of Gowers distance, pairwise between records in two data sets"
+optional = false
+python-versions = ">=2.7"
+groups = ["main"]
+files = [
+    {file = "gower-0.1.2-py3-none-any.whl", hash = "sha256:cb46e18243e1d88d2fa0a23d20afb71e5469f25db4ee6236db40f897dfea9e6f"},
+    {file = "gower-0.1.2.tar.gz", hash = "sha256:34ddb5158f0e8bfba093dca06b9f887bda244998d10af2a3ad8c74a6efa1b5f6"},
+]
+
+[package.dependencies]
+numpy = "*"
+scipy = "*"
+
+[[package]]
 name = "ipykernel"
 version = "6.30.1"
 description = "IPython Kernel for Jupyter"
@@ -1733,4 +1749,4 @@ test = ["pytest", "pytest-cov"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13.5"
-content-hash = "8f81abc6a9ba17d908baad313cceef147c13005dea4e78ac2a589b7b630b8e0b"
+content-hash = "f0cc245d5d0a08ad3221bfcd486c100e6354a4457f6e9e6d2ae422b59985d352"

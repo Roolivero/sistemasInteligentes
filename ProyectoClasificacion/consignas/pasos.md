@@ -10,7 +10,7 @@ Entender qué se quiere predecir, qué variables se tienen y cómo están estruc
 1. **Verificar la estructura y los tipos de las variables** (son 31)
    - El dataset contiene 31 columnas en total, de las cuales 30 corresponden a las características o atributos utilizados para describir los sitios web (por ejemplo, longitud de la URL, uso de SSL, edad del dominio, etc.).
    - La última columna, denominada **Result**, es la variable objetivo que indica si el sitio es phishing (1) o legítimo (-1).
-   - En el análisis exploratorio inicial, **Result** debe incluirse para revisar su distribución y balance de clases, pero **no debe usarse** como variable predictora en los modelos; se emplea únicamente como etiqueta o variable de salida durante el entrenamiento y evaluación.
+   - En el análisis exploratorio inicial, **Result** debe incluirse para revisar su distribución y balance de clases. La **debemos usar** como variable predictora en los modelos (en la fase de entrenamiento);
 
 2. **Separar features en binarias y ordinales**
    - Las variables del dataset son discretas y codificadas con valores -1, 0 y 1, que representan niveles de sospecha o legitimidad.
@@ -59,7 +59,7 @@ Dividir el conjunto de datos en subconjuntos para entrenar, ajustar y evaluar el
    X = datos.drop("Result", axis=1)
    y = datos["Result"]
    ```
-   Confirmar que Result sea binaria: 1 (phishing) y -1 (legítimo).
+   Confirmar que Result sea binaria: 1 (phishing) y -1 (legítimo). 
 
 2. **División en subconjuntos**
    

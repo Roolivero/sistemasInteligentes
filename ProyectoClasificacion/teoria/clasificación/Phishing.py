@@ -30,7 +30,7 @@ os.makedirs(output_dir, exist_ok=True)
 # =========================
 # 1. Cargar dataset ARFF
 # =========================
-data, meta = arff.loadarff("/Users/lucila/PyCharmProjects/SistemasInteligentes/clasificación/phishing+websites/Training Dataset.arff")
+data, meta = arff.loadarff("/home/ro/Desktop/facu/4to/2doCuatrimestre/sistemasInteligentes/sistemasInteligentes/ProyectoClasificacion/phishing+websites/Training Dataset.arff")
 print(meta)
 df = pd.DataFrame(data)
 
@@ -84,6 +84,7 @@ y_pred_base = model_base.predict(X_test_scaled)
 # 6. Optimización de Hiperparámetros
 # =========================
 param_grid = {"var_smoothing": np.logspace(-12, -6, 7)}
+print(param_grid)
 cv = StratifiedKFold(n_splits=3, shuffle=True, random_state=RANDOM_STATE)
 
 grid_search = GridSearchCV(

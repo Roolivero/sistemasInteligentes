@@ -195,3 +195,9 @@ Se parte del modelo entrenado en la Fase 4 (GaussianNB() sin ajustes) como refer
 7. **Comparar con el modelo base**
    - Mostrar tabla comparativa (Base vs Optimizado).
    - Analizar si se redujeron los falsos negativos (FN) o los falsos positivos (FP).
+
+
+## Observaciones: 
+
+- se pueden seleccionar las columnas 
+- ver el smottohing que sea continuo 

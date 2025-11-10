@@ -113,12 +113,12 @@ plt.close()
 # =========================
 # 8. Comparación de métricas
 # =========================
-def metrics(y_true, y_pred):
+def metrics(y_true, y_pred, pos_label=-1):
     return {
         "Accuracy": accuracy_score(y_true, y_pred),
-        "Precision": precision_score(y_true, y_pred),
-        "Recall": recall_score(y_true, y_pred),
-        "F1": f1_score(y_true, y_pred),
+        "Precision": precision_score(y_true, y_pred, pos_label=pos_label),
+        "Recall": recall_score(y_true, y_pred, pos_label=pos_label),
+        "F1": f1_score(y_true, y_pred, pos_label=pos_label),
     }
 
 results = pd.DataFrame({

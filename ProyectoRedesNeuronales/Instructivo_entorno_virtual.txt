@@ -1,0 +1,71 @@
+🧩 Instructivo: Crear entorno virtual, instalar dependencias y probar imports
+
+1. Crear entorno virtual
+------------------------
+Ubicate en la carpeta del proyecto y ejecutá:
+
+    python3 -m venv .venv
+
+Esto crea una carpeta llamada .venv con el entorno virtual.
+
+
+2. Activar el entorno virtual
+-----------------------------
+- En macOS / Linux:
+    source .venv/bin/activate
+
+- En Windows (PowerShell):
+    .venv\Scripts\activate
+
+
+3. Instalar paquetes desde requirements.txt
+-------------------------------------------
+Asegurate de tener un archivo requirements.txt (por ejemplo):
+
+    mediapipe==0.10.7
+    mediapipe-model-maker==0.2.1
+    tensorflow==2.13.0
+    tensorflow-addons==0.22.0
+    keras==2.13.1
+    pyyaml==6.0.1
+
+Luego ejecutá:
+
+    pip install -r requirements.txt
+
+
+4. Probar la instalación con un script de test
+----------------------------------------------
+Creá un archivo llamado test_imports.py con el siguiente contenido:
+
+    # test_imports.py
+
+    try:
+        from mediapipe_model_maker import object_detector
+        from mediapipe_model_maker.python.vision.object_detector import model_spec as ms
+        import os
+        import random
+        import shutil
+        print("✅ Todos los módulos se importaron correctamente.")
+    except ImportError as e:
+        print("❌ Error de importación:", e)
+    except Exception as e:
+        print("⚠️ Otro error:", e)
+
+
+5. Ejecutar la prueba
+---------------------
+Con el entorno virtual activado, corré:
+
+    python test_imports.py
+
+Si todo está correcto, deberías ver:
+
+    ✅ Todos los módulos se importaron correctamente.
+
+
+6. Desactivar el entorno virtual
+--------------------------------
+Cuando termines, desactivá el entorno con:
+
+    deactivate

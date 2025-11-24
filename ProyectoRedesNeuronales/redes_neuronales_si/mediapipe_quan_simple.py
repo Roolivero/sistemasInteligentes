@@ -1,12 +1,16 @@
-from mediapipe_model_maker import object_detector
-from mediapipe_model_maker.python.vision.object_detector import model_spec as ms
 import os
 import shutil
+from pathlib import Path
 
-DATASET_DIR = "/Users/lucila/Datasets/Hard Hat Sample.v2-augmented-416x416.voc"
-CACHE_DIR = "/Users/lucila/Datasets/Hard Hat Sample.v2-augmented-416x416.voc/cache"
-MODEL_PATH = "/Users/lucila/PycharmProjects/deteccion_documentos/redes_neuronales_si/models/mobilenet_v2_float"
-MODEL_QUAN_PATH = "/Users/lucila/PycharmProjects/deteccion_documentos/redes_neuronales_si/models/mobilenet_v2_qat.tflite"
+from mediapipe_model_maker import object_detector
+from mediapipe_model_maker.python.vision.object_detector import model_spec as ms
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+DATASET_DIR = SCRIPT_DIR / "Hard Hat Sample.v2-augmented-416x416.voc"
+CACHE_DIR = DATASET_DIR / "cache"
+MODEL_DIR = SCRIPT_DIR / "models"
+MODEL_PATH = MODEL_DIR / "mobilenet_v2_float"
+MODEL_QUAN_PATH = MODEL_DIR / "mobilenet_v2_qat.tflite"
 
 #============================================================================
 # HIPERPARÁMETROS DE ENTRENAMIENTO
@@ -45,30 +49,60 @@ DECAY_STEPS = 8
 # - Permite convergencia más suave: ajustes grandes al inicio, finos al final
 DECAY_RATE = 0.96
 
-def ensure_cache_structure(cache_dir):
+
+def ensure_dataset_dirs(dataset_dir: Path):
+    """Valida que el dataset exista donde esperamos."""
+    train_dir = dataset_dir / "train"
+    val_dir = dataset_dir / "valid"
+    if not train_dir.exists() or not val_dir.exists():
+        raise FileNotFoundError(
+            f"No se encontraron las carpetas 'train' y 'valid' en {dataset_dir}. "
+            "Copia el dataset completo junto a este script: redes_neuronales_si/Hard Hat Sample.v2-augmented-416x416.voc"
+        )
+    return train_dir, val_dir
+
+
+def normalize_voc_dirs(dataset_dir: Path):
+    """Normaliza nombres de carpetas a lo que MediaPipe espera (images en minúsculas)."""
+    for split in ("train", "valid", "test"):
+        split_dir = dataset_dir / split
+        if not split_dir.exists():
+            continue
+        images_upper = split_dir / "Images"
+        images_lower = split_dir / "images"
+        if images_upper.exists() and not images_lower.exists():
+            images_upper.rename(images_lower)
+        elif images_upper.exists() and images_lower.exists():
+            raise FileExistsError(
+                f"Se encontraron 'Images' y 'images' en {split_dir}. "
+                "Unifica en una sola carpeta 'images'."
+            )
+
+
+def ensure_cache_structure(cache_dir: Path):
     """Crea la estructura de cache que MediaPipe necesita."""
-    if os.path.exists(cache_dir):
+    if cache_dir.exists():
         shutil.rmtree(cache_dir)
 
-    os.makedirs(os.path.join(cache_dir, "train"), exist_ok=True)
-    os.makedirs(os.path.join(cache_dir, "valid"), exist_ok=True)
+    (cache_dir / "train").mkdir(parents=True, exist_ok=True)
+    (cache_dir / "valid").mkdir(parents=True, exist_ok=True)
 
 
 def main():
-    train_dir = os.path.join(DATASET_DIR, "train")
-    val_dir = os.path.join(DATASET_DIR, "valid")
+    normalize_voc_dirs(DATASET_DIR)
+    train_dir, val_dir = ensure_dataset_dirs(DATASET_DIR)
 
     print("Creando estructura de cache...")
     ensure_cache_structure(CACHE_DIR)
 
     print("Cargando dataset...")
     train_data = object_detector.Dataset.from_pascal_voc_folder(
-        data_dir=train_dir,
-        cache_dir=os.path.join(CACHE_DIR, "train")
+        data_dir=str(train_dir),
+        cache_dir=str(CACHE_DIR / "train")
     )
     val_data = object_detector.Dataset.from_pascal_voc_folder(
-        data_dir=val_dir,
-        cache_dir=os.path.join(CACHE_DIR, "valid")
+        data_dir=str(val_dir),
+        cache_dir=str(CACHE_DIR / "valid")
     )
 
     print(f"Train dataset cargado")
@@ -81,7 +115,7 @@ def main():
     os.makedirs(MODEL_PATH, exist_ok=True)
 
     hparams = object_detector.HParams(
-        export_dir=MODEL_PATH,
+        export_dir=str(MODEL_PATH),
         epochs=EPOCHS
     )
 
@@ -111,8 +145,8 @@ def main():
         print(f"  mAP: {metrics[0]:.4f}" if isinstance(metrics[0], (int, float)) else f"  Métricas: {metrics}")
 
     # Exportar modelo float
-    float_model_path = MODEL_PATH + "/model_float.tflite"
-    model.export_model(float_model_path)
+    float_model_path = MODEL_PATH / "model_float.tflite"
+    model.export_model(str(float_model_path))
     print(f"Modelo float exportado: {float_model_path}")
 
     print("\n=== PASO 2: Quantization Aware Training ===")
@@ -136,7 +170,7 @@ def main():
     print("Métricas:", metrics)
 
     print(f"\nExportando modelo cuantizado: {MODEL_QUAN_PATH}")
-    model.export_model(MODEL_QUAN_PATH)
+    model.export_model(str(MODEL_QUAN_PATH))
     print("¡Entrenamiento completo!")
     print(f"\nResumen:")
     print(f"- Modelo float: {float_model_path}")

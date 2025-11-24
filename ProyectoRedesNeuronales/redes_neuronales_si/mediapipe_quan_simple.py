@@ -2,6 +2,7 @@ import os
 import shutil
 from pathlib import Path
 
+import tensorflow as tf
 from mediapipe_model_maker import object_detector
 from mediapipe_model_maker.python.vision.object_detector import model_spec as ms
 
@@ -20,7 +21,7 @@ MODEL_QUAN_PATH = MODEL_DIR / "mobilenet_v2_qat.tflite"
 # - Valores típicos: 20-100 para object detection
 # - Más épocas = mejor aprendizaje, pero riesgo de overfitting
 # - 30 épocas es un buen balance para datasets medianos
-EPOCHS = 3
+EPOCHS = 20
 
 # LEARNING_RATE: Tasa de aprendizaje - controla qué tan grandes son los ajustes de pesos
 # - Valores típicos: 0.001 - 0.3 para object detection
@@ -88,7 +89,23 @@ def ensure_cache_structure(cache_dir: Path):
     (cache_dir / "valid").mkdir(parents=True, exist_ok=True)
 
 
+def configure_tensorflow():
+    """Muestra si hay GPU disponible y activa logs de colocación de dispositivos."""
+    gpus = tf.config.list_physical_devices("GPU")
+    print("GPUs disponibles:", gpus)
+    if not gpus:
+        print("No se detectó GPU; se usará CPU.")
+        return
+
+    for gpu in gpus:
+        tf.config.experimental.set_memory_growth(gpu, True)
+
+    tf.debugging.set_log_device_placement(True)
+    print("Log de colocación de dispositivos activado (CPU/GPU).")
+
+
 def main():
+    configure_tensorflow()
     normalize_voc_dirs(DATASET_DIR)
     train_dir, val_dir = ensure_dataset_dirs(DATASET_DIR)
 

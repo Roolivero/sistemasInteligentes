@@ -20,7 +20,7 @@ MODEL_QUAN_PATH = MODEL_DIR / "mobilenet_v2_qat.tflite"
 # - Valores típicos: 20-100 para object detection
 # - Más épocas = mejor aprendizaje, pero riesgo de overfitting
 # - 30 épocas es un buen balance para datasets medianos
-EPOCHS = 1
+EPOCHS = 3
 
 # LEARNING_RATE: Tasa de aprendizaje - controla qué tan grandes son los ajustes de pesos
 # - Valores típicos: 0.001 - 0.3 para object detection

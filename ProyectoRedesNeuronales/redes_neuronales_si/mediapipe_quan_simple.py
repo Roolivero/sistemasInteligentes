@@ -1,8 +1,10 @@
 import os
 import shutil
+import warnings
 from pathlib import Path
 
 import tensorflow as tf
+from absl import logging as absl_logging
 from mediapipe_model_maker import object_detector
 from mediapipe_model_maker.python.vision.object_detector import model_spec as ms
 
@@ -13,6 +15,9 @@ MODEL_DIR = SCRIPT_DIR / "models"
 MODEL_PATH = MODEL_DIR / "mobilenet_v2_float"
 MODEL_QUAN_PATH = MODEL_DIR / "mobilenet_v2_qat.tflite"
 
+# Reducir verbosidad de logs C++ de TensorFlow (0=all, 1=INFO, 2=WARNING, 3=ERROR)
+os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "3")
+
 #============================================================================
 # HIPERPARÁMETROS DE ENTRENAMIENTO
 # ============================================================================
@@ -21,7 +26,7 @@ MODEL_QUAN_PATH = MODEL_DIR / "mobilenet_v2_qat.tflite"
 # - Valores típicos: 20-100 para object detection
 # - Más épocas = mejor aprendizaje, pero riesgo de overfitting
 # - 30 épocas es un buen balance para datasets medianos
-EPOCHS = 20
+EPOCHS = 15
 
 # LEARNING_RATE: Tasa de aprendizaje - controla qué tan grandes son los ajustes de pesos
 # - Valores típicos: 0.001 - 0.3 para object detection
@@ -89,6 +94,15 @@ def ensure_cache_structure(cache_dir: Path):
     (cache_dir / "valid").mkdir(parents=True, exist_ok=True)
 
 
+def reduce_verbosity():
+    """Silencia warnings/INFO de TF, absl y python para limpiar la salida."""
+    warnings.filterwarnings("ignore", category=UserWarning)
+    warnings.filterwarnings("ignore", category=FutureWarning)
+    absl_logging.set_verbosity(absl_logging.ERROR)
+    tf.get_logger().setLevel("ERROR")
+    tf.autograph.set_verbosity(0)
+
+
 def configure_tensorflow():
     """Muestra si hay GPU disponible y activa logs de colocación de dispositivos."""
     gpus = tf.config.list_physical_devices("GPU")
@@ -100,11 +114,12 @@ def configure_tensorflow():
     for gpu in gpus:
         tf.config.experimental.set_memory_growth(gpu, True)
 
-    tf.debugging.set_log_device_placement(True)
-    print("Log de colocación de dispositivos activado (CPU/GPU).")
+    # tf.debugging.set_log_device_placement(True)  # Descomenta para ver trazas detalladas CPU/GPU
+    # print("Log de colocación de dispositivos activado (CPU/GPU).")
 
 
 def main():
+    reduce_verbosity()
     configure_tensorflow()
     normalize_voc_dirs(DATASET_DIR)
     train_dir, val_dir = ensure_dataset_dirs(DATASET_DIR)

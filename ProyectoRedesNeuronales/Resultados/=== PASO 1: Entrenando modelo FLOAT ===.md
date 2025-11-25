@@ -954,3 +954,287 @@ DONE (t=0.20s).
  Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.017
 QAT model - Loss:  [1.3795297145843506, 0.9328759908676147, 0.008933073841035366, 1.3795297145843506]
 Métricas: {'AP': 0.021526774, 'AP50': 0.06806162, 'AP75': 0.008250825, 'APs': 0.0, 'APm': 0.031231662, 'APl': 0.016831683, 'ARmax1': 0.014074074, 'ARmax10': 0.028888889, 'ARmax100': 0.028888889, 'ARs': 0.0, 'ARm': 0.04222222, 'ARl': 0.016666668}
+
+
+----------------------------------------------
+-------------------------------------------------
+
+
+Usamos:
+EPOCHS = 3
+LEARNING_RATE = 0.15
+BATCH_SIZE = 4
+DECAY_STEPS = 8
+DECAY_RATE = 0.96
+
+
+=== PASO 1: Entrenando modelo FLOAT ===
+/mnt/sda1/code/si/ProyectoRedesNeuronales/.venv/lib/python3.9/site-packages/keras/src/engine/functional.py:642: UserWarning: Input dict contained keys ['6'] which did not match any model input. They will be ignored by the model.
+  inputs = self._flatten_to_reference_inputs(inputs)
+WARNING:tensorflow:`tf.keras.layers.experimental.SyncBatchNormalization` endpoint is deprecated and will be removed in a future release. Please use `tf.keras.layers.BatchNormalization` with parameter `synchronized` set to True.
+WARNING:tensorflow:`tf.keras.layers.experimental.SyncBatchNormalization` endpoint is deprecated and will be removed in a future release. Please use `tf.keras.layers.BatchNormalization` with parameter `synchronized` set to True.
+Using existing files at /tmp/model_maker/object_detector/mobilenetv2_i256
+Model: "retina_net_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ mobile_net (MobileNet)      {'2': (None, 64, 64, 24   2257984   
+                             ),                                  
+                              '3': (None, 32, 32, 32             
+                             ),                                  
+                              '4': (None, 16, 16, 96             
+                             ),                                  
+                              '5': (None, 8, 8, 320)             
+                             , '6': (None, 8, 8, 128             
+                             0)}                                 
+                                                                 
+ fpn (FPN)                   {'5': (None, 8, 8, 128)   149056    
+                             , '4': (None, 16, 16, 1             
+                             28),                                
+                              '3': (None, 32, 32, 12             
+                             8),                                 
+                              '6': (None, 4, 4, 128)             
+                             , '7': (None, 2, 2, 128             
+                             )}                                  
+                                                                 
+ multilevel_detection_gener  multiple                  0 (unused)
+ ator (MultilevelDetectionG                                      
+ enerator)                                                       
+                                                                 
+ retina_net_head (RetinaNet  ({'3': (None, 32, 32, 3   173384    
+ Head)                       6),                                 
+                              '4': (None, 16, 16, 36             
+                             ),                                  
+                              '5': (None, 8, 8, 36),             
+                              '6': (None, 4, 4, 36),             
+                              '7': (None, 2, 2, 36)}             
+                             , {'3': (None, 32, 32,              
+                             36),                                
+                              '4': (None, 16, 16, 36             
+                             ),                                  
+                              '5': (None, 8, 8, 36),             
+                              '6': (None, 4, 4, 36),             
+                              '7': (None, 2, 2, 36)}             
+                             , {})                               
+                                                                 
+=================================================================
+Total params: 2580424 (9.84 MB)
+Trainable params: 2534792 (9.67 MB)
+Non-trainable params: 45632 (178.25 KB)
+_________________________________________________________________
+Epoch 1/15
+/mnt/sda1/code/si/ProyectoRedesNeuronales/.venv/lib/python3.9/site-packages/keras/src/backend.py:452: UserWarning: `tf.keras.backend.set_learning_phase` is deprecated and will be removed after 2020-10-11. To update it, simply pass a True/False value to the `training` argument of the `__call__` method of your layer or model.
+  warnings.warn(
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_1/batch_normalization/gamma:0', 'conv2dbn_block_1/batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_1/batch_normalization/gamma:0', 'conv2dbn_block_1/batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_1/batch_normalization/gamma:0', 'conv2dbn_block_1/batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_1/batch_normalization/gamma:0', 'conv2dbn_block_1/batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_1/batch_normalization/gamma:0', 'conv2dbn_block_1/batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_1/batch_normalization/gamma:0', 'conv2dbn_block_1/batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_1/batch_normalization/gamma:0', 'conv2dbn_block_1/batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_1/batch_normalization/gamma:0', 'conv2dbn_block_1/batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+2025-11-24 18:14:32.248569: W tensorflow/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 50331648 exceeds 10% of free system memory.
+2025-11-24 18:14:34.282930: W tensorflow/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 50331648 exceeds 10% of free system memory.
+2025-11-24 18:14:34.285484: W tensorflow/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 50331648 exceeds 10% of free system memory.
+2025-11-24 18:14:34.979280: W tensorflow/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 50331648 exceeds 10% of free system memory.
+2025-11-24 18:14:42.576268: W tensorflow/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 50331648 exceeds 10% of free system memory.
+26/26 [==============================] - 69s 1s/step - total_loss: 4.2605 - cls_loss: 3.7147 - box_loss: 0.0098 - model_loss: 4.2055 - val_total_loss: 1.4395 - val_cls_loss: 1.0882 - val_box_loss: 0.0059 - val_model_loss: 1.3845
+Epoch 2/15
+26/26 [==============================] - 29s 1s/step - total_loss: 1.3365 - cls_loss: 0.9476 - box_loss: 0.0067 - model_loss: 1.2815 - val_total_loss: 1.0548 - val_cls_loss: 0.7710 - val_box_loss: 0.0046 - val_model_loss: 0.9998
+Epoch 3/15
+26/26 [==============================] - 51s 2s/step - total_loss: 0.9797 - cls_loss: 0.6600 - box_loss: 0.0053 - model_loss: 0.9247 - val_total_loss: 0.8952 - val_cls_loss: 0.6438 - val_box_loss: 0.0039 - val_model_loss: 0.8402
+Epoch 4/15
+26/26 [==============================] - 32s 1s/step - total_loss: 0.7877 - cls_loss: 0.5192 - box_loss: 0.0043 - model_loss: 0.7327 - val_total_loss: 0.7576 - val_cls_loss: 0.5253 - val_box_loss: 0.0035 - val_model_loss: 0.7026
+Epoch 5/15
+26/26 [==============================] - 28s 1s/step - total_loss: 0.7049 - cls_loss: 0.4563 - box_loss: 0.0039 - model_loss: 0.6499 - val_total_loss: 0.7097 - val_cls_loss: 0.4613 - val_box_loss: 0.0039 - val_model_loss: 0.6548
+Epoch 6/15
+26/26 [==============================] - 35s 1s/step - total_loss: 0.6295 - cls_loss: 0.3957 - box_loss: 0.0036 - model_loss: 0.5745 - val_total_loss: 0.7216 - val_cls_loss: 0.4524 - val_box_loss: 0.0043 - val_model_loss: 0.6666
+Epoch 7/15
+26/26 [==============================] - 27s 1s/step - total_loss: 0.5784 - cls_loss: 0.3665 - box_loss: 0.0031 - model_loss: 0.5235 - val_total_loss: 0.6694 - val_cls_loss: 0.4053 - val_box_loss: 0.0042 - val_model_loss: 0.6145
+Epoch 8/15
+26/26 [==============================] - 27s 1s/step - total_loss: 0.5470 - cls_loss: 0.3438 - box_loss: 0.0030 - model_loss: 0.4921 - val_total_loss: 0.6519 - val_cls_loss: 0.3762 - val_box_loss: 0.0044 - val_model_loss: 0.5969
+Epoch 9/15
+26/26 [==============================] - 26s 994ms/step - total_loss: 0.5419 - cls_loss: 0.3379 - box_loss: 0.0030 - model_loss: 0.4869 - val_total_loss: 0.6381 - val_cls_loss: 0.3609 - val_box_loss: 0.0044 - val_model_loss: 0.5831
+Epoch 10/15
+26/26 [==============================] - 27s 1s/step - total_loss: 0.4930 - cls_loss: 0.3053 - box_loss: 0.0027 - model_loss: 0.4380 - val_total_loss: 0.6079 - val_cls_loss: 0.3435 - val_box_loss: 0.0042 - val_model_loss: 0.5529
+Epoch 11/15
+26/26 [==============================] - 30s 1s/step - total_loss: 0.4712 - cls_loss: 0.2915 - box_loss: 0.0025 - model_loss: 0.4162 - val_total_loss: 0.6114 - val_cls_loss: 0.3415 - val_box_loss: 0.0043 - val_model_loss: 0.5564
+Epoch 12/15
+26/26 [==============================] - 26s 1s/step - total_loss: 0.4643 - cls_loss: 0.2837 - box_loss: 0.0025 - model_loss: 0.4093 - val_total_loss: 0.6096 - val_cls_loss: 0.3375 - val_box_loss: 0.0043 - val_model_loss: 0.5546
+Epoch 13/15
+26/26 [==============================] - 26s 992ms/step - total_loss: 0.4463 - cls_loss: 0.2670 - box_loss: 0.0025 - model_loss: 0.3913 - val_total_loss: 0.5697 - val_cls_loss: 0.3119 - val_box_loss: 0.0041 - val_model_loss: 0.5147
+Epoch 14/15
+26/26 [==============================] - 32s 1s/step - total_loss: 0.4677 - cls_loss: 0.2754 - box_loss: 0.0027 - model_loss: 0.4127 - val_total_loss: 0.6029 - val_cls_loss: 0.3521 - val_box_loss: 0.0039 - val_model_loss: 0.5479
+Epoch 15/15
+26/26 [==============================] - 27s 1s/step - total_loss: 0.4399 - cls_loss: 0.2632 - box_loss: 0.0024 - model_loss: 0.3849 - val_total_loss: 0.5748 - val_cls_loss: 0.3259 - val_box_loss: 0.0039 - val_model_loss: 0.5198
+
+Evaluando modelo float...
+20/20 [==============================] - 3s 76ms/step - total_loss: 0.5650 - cls_loss: 0.3155 - box_loss: 0.0039 - model_loss: 0.5100
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.09s).
+Accumulating evaluation results...
+DONE (t=0.06s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.270
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.556
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.272
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.239
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.285
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.725
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.199
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.500
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.526
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.256
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.535
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.767
+Float model - Loss:  [0.5650215744972229, 0.3155274987220764, 0.00389036163687706, 0.51004558801651]
+Métricas: {'AP': 0.27023366, 'AP50': 0.55564123, 'AP75': 0.2715503, 'APs': 0.23919141, 'APm': 0.2850917, 'APl': 0.72541255, 'ARmax1': 0.19851851, 'ARmax10': 0.49962962, 'ARmax100': 0.52555555, 'ARs': 0.25555557, 'ARm': 0.53481483, 'ARl': 0.76666665}
+  AP: 0.2702336609363556
+  AP50: 0.555641233921051
+  AP75: 0.2715502977371216
+  APs: 0.23919141292572021
+  APm: 0.28509169816970825
+  APl: 0.7254125475883484
+  ARmax1: 0.1985185146331787
+  ARmax10: 0.4996296167373657
+  ARmax100: 0.5255555510520935
+  ARs: 0.25555557012557983
+  ARm: 0.5348148345947266
+  ARl: 0.7666666507720947
+
+
+
+
+=== PASO 2: Quantization Aware Training ===
+Restaurando checkpoint float...
+/mnt/sda1/code/si/ProyectoRedesNeuronales/.venv/lib/python3.9/site-packages/keras/src/engine/functional.py:642: UserWarning: Input dict contained keys ['6'] which did not match any model input. They will be ignored by the model.
+  inputs = self._flatten_to_reference_inputs(inputs)
+Using existing files at /tmp/model_maker/object_detector/mobilenetv2_i256
+Model: "retina_net_model_2"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ mobile_net_1 (MobileNet)    {'2': (None, 64, 64, 24   2257984   
+                             ),                                  
+                              '3': (None, 32, 32, 32             
+                             ),                                  
+                              '4': (None, 16, 16, 96             
+                             ),                                  
+                              '5': (None, 8, 8, 320)             
+                             , '6': (None, 8, 8, 128             
+                             0)}                                 
+                                                                 
+ fpn_1 (FPN)                 {'5': (None, 8, 8, 128)   149056    
+                             , '4': (None, 16, 16, 1             
+                             28),                                
+                              '3': (None, 32, 32, 12             
+                             8),                                 
+                              '6': (None, 4, 4, 128)             
+                             , '7': (None, 2, 2, 128             
+                             )}                                  
+                                                                 
+ multilevel_detection_gener  multiple                  0 (unused)
+ ator_2 (MultilevelDetectio                                      
+ nGenerator)                                                     
+                                                                 
+ retina_net_head_1 (RetinaN  ({'3': (None, 32, 32, 3   173384    
+ etHead)                     6),                                 
+                              '4': (None, 16, 16, 36             
+                             ),                                  
+                              '5': (None, 8, 8, 36),             
+                              '6': (None, 4, 4, 36),             
+                              '7': (None, 2, 2, 36)}             
+                             , {'3': (None, 32, 32,              
+                             36),                                
+                              '4': (None, 16, 16, 36             
+                             ),                                  
+                              '5': (None, 8, 8, 36),             
+                              '6': (None, 4, 4, 36),             
+                              '7': (None, 2, 2, 36)}             
+                             , {})                               
+                                                                 
+=================================================================
+Total params: 2580424 (9.84 MB)
+Trainable params: 2534792 (9.67 MB)
+Non-trainable params: 45632 (178.25 KB)
+_________________________________________________________________
+Iniciando QAT...
+WARNING:tensorflow:`tf.keras.layers.experimental.SyncBatchNormalization` endpoint is deprecated and will be removed in a future release. Please use `tf.keras.layers.BatchNormalization` with parameter `synchronized` set to True.
+WARNING:tensorflow:`tf.keras.layers.experimental.SyncBatchNormalization` endpoint is deprecated and will be removed in a future release. Please use `tf.keras.layers.BatchNormalization` with parameter `synchronized` set to True.
+Epoch 1/15
+/mnt/sda1/code/si/ProyectoRedesNeuronales/.venv/lib/python3.9/site-packages/keras/src/backend.py:452: UserWarning: `tf.keras.backend.set_learning_phase` is deprecated and will be removed after 2020-10-11. To update it, simply pass a True/False value to the `training` argument of the `__call__` method of your layer or model.
+  warnings.warn(
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_5/quant_conv2d/kernel:0', 'conv2dbn_block_5/quant_sync_batch_normalization/gamma:0', 'conv2dbn_block_5/quant_sync_batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_5/quant_conv2d/kernel:0', 'conv2dbn_block_5/quant_sync_batch_normalization/gamma:0', 'conv2dbn_block_5/quant_sync_batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_5/quant_conv2d/kernel:0', 'conv2dbn_block_5/quant_sync_batch_normalization/gamma:0', 'conv2dbn_block_5/quant_sync_batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_5/quant_conv2d/kernel:0', 'conv2dbn_block_5/quant_sync_batch_normalization/gamma:0', 'conv2dbn_block_5/quant_sync_batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_5/quant_conv2d/kernel:0', 'conv2dbn_block_5/quant_sync_batch_normalization/gamma:0', 'conv2dbn_block_5/quant_sync_batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_5/quant_conv2d/kernel:0', 'conv2dbn_block_5/quant_sync_batch_normalization/gamma:0', 'conv2dbn_block_5/quant_sync_batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_5/quant_conv2d/kernel:0', 'conv2dbn_block_5/quant_sync_batch_normalization/gamma:0', 'conv2dbn_block_5/quant_sync_batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+WARNING:tensorflow:Gradients do not exist for variables ['conv2dbn_block_5/quant_conv2d/kernel:0', 'conv2dbn_block_5/quant_sync_batch_normalization/gamma:0', 'conv2dbn_block_5/quant_sync_batch_normalization/beta:0'] when minimizing the loss. If you're using `model.compile()`, did you forget to provide a `loss` argument?
+52/52 [==============================] - 104s 855ms/step - total_loss: 1.5296 - cls_loss: 0.7655 - box_loss: 0.0153 - model_loss: 1.5296 - val_total_loss: 2.0611 - val_cls_loss: 1.3814 - val_box_loss: 0.0136 - val_model_loss: 2.0611
+Epoch 2/15
+52/52 [==============================] - 35s 593ms/step - total_loss: 0.9572 - cls_loss: 0.5540 - box_loss: 0.0081 - model_loss: 0.9572 - val_total_loss: 1.7071 - val_cls_loss: 1.1646 - val_box_loss: 0.0109 - val_model_loss: 1.7071
+Epoch 3/15
+52/52 [==============================] - 43s 775ms/step - total_loss: 0.8011 - cls_loss: 0.4834 - box_loss: 0.0064 - model_loss: 0.8011 - val_total_loss: 1.4589 - val_cls_loss: 1.0328 - val_box_loss: 0.0085 - val_model_loss: 1.4589
+Epoch 4/15
+52/52 [==============================] - 48s 922ms/step - total_loss: 0.7364 - cls_loss: 0.4457 - box_loss: 0.0058 - model_loss: 0.7364 - val_total_loss: 1.2617 - val_cls_loss: 0.8956 - val_box_loss: 0.0073 - val_model_loss: 1.2617
+Epoch 5/15
+52/52 [==============================] - 41s 784ms/step - total_loss: 0.7077 - cls_loss: 0.4361 - box_loss: 0.0054 - model_loss: 0.7077 - val_total_loss: 1.0859 - val_cls_loss: 0.7473 - val_box_loss: 0.0068 - val_model_loss: 1.0859
+Epoch 6/15
+52/52 [==============================] - 50s 968ms/step - total_loss: 0.7218 - cls_loss: 0.4504 - box_loss: 0.0054 - model_loss: 0.7218 - val_total_loss: 0.9351 - val_cls_loss: 0.6128 - val_box_loss: 0.0064 - val_model_loss: 0.9351
+Epoch 7/15
+52/52 [==============================] - 36s 698ms/step - total_loss: 0.6767 - cls_loss: 0.4146 - box_loss: 0.0052 - model_loss: 0.6767 - val_total_loss: 0.8139 - val_cls_loss: 0.5110 - val_box_loss: 0.0061 - val_model_loss: 0.8139
+Epoch 8/15
+52/52 [==============================] - 40s 765ms/step - total_loss: 0.6641 - cls_loss: 0.4064 - box_loss: 0.0052 - model_loss: 0.6641 - val_total_loss: 0.7360 - val_cls_loss: 0.4381 - val_box_loss: 0.0060 - val_model_loss: 0.7360
+Epoch 9/15
+52/52 [==============================] - 42s 818ms/step - total_loss: 0.6665 - cls_loss: 0.4135 - box_loss: 0.0051 - model_loss: 0.6665 - val_total_loss: 0.6888 - val_cls_loss: 0.4059 - val_box_loss: 0.0057 - val_model_loss: 0.6888
+Epoch 10/15
+52/52 [==============================] - 44s 836ms/step - total_loss: 0.6340 - cls_loss: 0.3963 - box_loss: 0.0048 - model_loss: 0.6340 - val_total_loss: 0.6818 - val_cls_loss: 0.3939 - val_box_loss: 0.0058 - val_model_loss: 0.6818
+Epoch 11/15
+52/52 [==============================] - 46s 882ms/step - total_loss: 0.6451 - cls_loss: 0.4017 - box_loss: 0.0049 - model_loss: 0.6451 - val_total_loss: 0.6712 - val_cls_loss: 0.3864 - val_box_loss: 0.0057 - val_model_loss: 0.6712
+Epoch 12/15
+52/52 [==============================] - 40s 770ms/step - total_loss: 0.6626 - cls_loss: 0.4101 - box_loss: 0.0051 - model_loss: 0.6626 - val_total_loss: 0.6609 - val_cls_loss: 0.3839 - val_box_loss: 0.0055 - val_model_loss: 0.6609
+Epoch 13/15
+52/52 [==============================] - 38s 734ms/step - total_loss: 0.6383 - cls_loss: 0.3937 - box_loss: 0.0049 - model_loss: 0.6383 - val_total_loss: 0.6665 - val_cls_loss: 0.3848 - val_box_loss: 0.0056 - val_model_loss: 0.6665
+Epoch 14/15
+52/52 [==============================] - 34s 662ms/step - total_loss: 0.6414 - cls_loss: 0.4024 - box_loss: 0.0048 - model_loss: 0.6414 - val_total_loss: 0.6678 - val_cls_loss: 0.3889 - val_box_loss: 0.0056 - val_model_loss: 0.6678
+Epoch 15/15
+52/52 [==============================] - 36s 692ms/step - total_loss: 0.6443 - cls_loss: 0.3959 - box_loss: 0.0050 - model_loss: 0.6443 - val_total_loss: 0.6674 - val_cls_loss: 0.3897 - val_box_loss: 0.0056 - val_model_loss: 0.6674
+
+Evaluando modelo cuantizado...
+20/20 [==============================] - 2s 59ms/step - total_loss: 0.7040 - cls_loss: 0.4027 - box_loss: 0.0060 - model_loss: 0.7040
+creating index...
+index created!
+creating index...
+index created!
+Running per image evaluation...
+Evaluate annotation type *bbox*
+DONE (t=0.14s).
+Accumulating evaluation results...
+DONE (t=0.17s).
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.163
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.407
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.135
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.078
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.168
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.686
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.085
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.254
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.270
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.078
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.283
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.733
+QAT model - Loss:  [0.703951358795166, 0.4027152955532074, 0.0060247210785746574, 0.703951358795166]
+Métricas: {'AP': 0.16294047, 'AP50': 0.40668327, 'AP75': 0.135322, 'APs': 0.07821782, 'APm': 0.16829619, 'APl': 0.686174, 'ARmax1': 0.08481482, 'ARmax10': 0.25407407, 'ARmax100': 0.26962963, 'ARs': 0.07777778, 'ARm': 0.28296295, 'ARl': 0.73333335}
+
+
+
+
+---------------------------------------------
+---------------------------------------------
+

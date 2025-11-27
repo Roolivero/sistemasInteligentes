@@ -26,14 +26,14 @@ os.environ.setdefault("TF_CPP_MIN_LOG_LEVEL", "3")
 # - Valores típicos: 20-100 para object detection
 # - Más épocas = mejor aprendizaje, pero riesgo de overfitting
 # - 30 épocas es un buen balance para datasets medianos
-EPOCHS = 20
+EPOCHS = 50
 
 # LEARNING_RATE: Tasa de aprendizaje - controla qué tan grandes son los ajustes de pesos
 # - Valores típicos: 0.001 - 0.3 para object detection
 # - Muy alto (>0.5): el modelo no converge, loss oscila
 # - Muy bajo (<0.001): entrenamiento muy lento
 # - 0.15 es agresivo pero efectivo para QAT (Quantization Aware Training)
-LEARNING_RATE = 0.15
+LEARNING_RATE = 0.05
 
 # BATCH_SIZE: Número de imágenes procesadas simultáneamente antes de actualizar pesos
 # - Valores típicos: 4-32 dependiendo de memoria GPU/CPU
@@ -46,14 +46,14 @@ BATCH_SIZE = 4
 # - Se usa con DECAY_RATE para implementar "learning rate decay"
 # - 8 pasos significa que cada 8 batches se aplicará la reducción
 # - Ayuda a que el modelo haga ajustes más finos conforme avanza el entrenamiento
-DECAY_STEPS = 8
+DECAY_STEPS = 16
 
 # DECAY_RATE: Factor de multiplicación para reducir el learning rate
 # - Nuevo LR = LR actual × DECAY_RATE
 # - 0.96 significa reducción del 4% cada DECAY_STEPS
 # - Valores típicos: 0.9-0.99
 # - Permite convergencia más suave: ajustes grandes al inicio, finos al final
-DECAY_RATE = 0.96
+DECAY_RATE = 0.98
 
 
 def ensure_dataset_dirs(dataset_dir: Path):

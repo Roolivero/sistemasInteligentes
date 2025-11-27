@@ -48,16 +48,16 @@ La configuración M_lr, con learning rate más bajo y 20 épocas, produce un mod
 Además de las métricas de detección, se compararon los modelos en términos de tiempo de entrenamiento y tamaño aproximado de los pesos. La Tabla 3 resume estos resultados para las tres configuraciones analizadas.
 
 **Tabla 3 – Tiempos de entrenamiento y tamaño aproximado de los pesos**
-| Configuración | Modelo | Épocas | Tiempo de entrenamiento | Total params | Tamaño estimado de pesos (MB) |
-| :------------ | :----- | :----: | :---------------------- | :----------: | :---------------------------: |
-| M_base        | Float  |   30   | 18 min 17 s             |   2 580 424  |             ≈ 9.84            |
-| M_base        | QAT    |   30   | 18 min 17 s             |   2 580 424  |             ≈ 9.84            |
-| M_lr          | Float  |   20   | 14 min 20 s             |   2 580 424  |             ≈ 9.84            |
-| M_lr          | QAT    |   20   | 14 min 20 s             |   2 580 424  |             ≈ 9.84            |
-| M_ap75        | Float  |   50   | 23 min 15 s             |   2 580 424  |             ≈ 9.84            |
-| M_ap75        | QAT    |   50   | 23 min 15 s             |   2 580 424  |             ≈ 9.84            |
+| Configuración | Modelo | Épocas | Tiempo de entrenamiento | Total params | Tamaño estimado de pesos (MB) | Factor de comprensión |
+| :------------ | :----- | :----: | :---------------------- | :----------: | :---------------------------: | :-------------------: |
+| M_base        | Float  |   30   | 18 min 17 s             |   2 580 424  |             ≈ 10.9            |           -           |
+| M_base        | QAT    |   30   | 18 min 17 s             |   2 580 424  |             ≈ 3.3             |        ≈ 3.3          |
+| M_lr          | Float  |   20   | 14 min 20 s             |   2 580 424  |             ≈ 10.9            |           -           |
+| M_lr          | QAT    |   20   | 14 min 20 s             |   2 580 424  |             ≈ 3.3             |        ≈ 3.3          |
+| M_ap75        | Float  |   50   | 23 min 15 s             |   2 580 424  |             ≈ 10.9            |           -           |
+| M_ap75        | QAT    |   50   | 23 min 15 s             |   2 580 424  |             ≈ 3.3             |        ≈ 3.3          |
 
-En todos los casos, el número total de parámetros del modelo es el mismo (≈2.58 millones), lo que se refleja en un tamaño estimado de los pesos en torno a 9.84 MB. Esto es coherente con el hecho de que las tres configuraciones comparten arquitectura y difieren únicamente en los hiperparámetros de entrenamiento. La variante QAT introduce una simulación de cuantización durante el entrenamiento, pero no modifica el número de parámetros del modelo; en términos de almacenamiento, la reducción de tamaño se manifiesta principalmente en el modelo TFLite final, que no se midió de manera separada en este trabajo.
+En todos los casos, el número total de parámetros del modelo es el mismo (≈2.58 millones), lo que se refleja en un tamaño estimado de los pesos en torno a 9.84 MB. Este valor es coherente con los tamaños medidos de los modelos TFLite exportados: el modelo float ocupa aproximadamente 10.9 MB en disco, mientras que la versión cuantizada mediante QAT se reduce a unos 3.3 MB, es decir, un factor de compresión de ~3.3×. Esta reducción es la que hace viable el despliegue en dispositivos móviles con restricciones de almacenamiento. Esto es coherente con el hecho de que las tres configuraciones comparten arquitectura y difieren únicamente en los hiperparámetros de entrenamiento. La variante QAT introduce una simulación de cuantización durante el entrenamiento, pero no modifica el número de parámetros del modelo; en términos de almacenamiento, la reducción de tamaño se manifiesta principalmente en el modelo TFLite final, que no se midió de manera separada en este trabajo.
 
 En cuanto al tiempo de entrenamiento, se observa una relación aproximadamente proporcional con la cantidad de épocas: la configuración M_lr (20 épocas) requiere alrededor de 14 minutos y 20 segundos, la configuración M_base (30 épocas) unos 18 minutos y 17 segundos, y la configuración M_ap75 (50 épocas) aproximadamente 23 minutos y 15 segundos. Dado que en cada caso el entrenamiento float y el QAT se realizan secuencialmente dentro del mismo script, ambos comparten el mismo tiempo total reportado. Estas diferencias de tiempo son relevantes a la hora de decidir si resulta conveniente entrenar configuraciones más largas orientadas a mejorar marginalmente ciertas métricas, teniendo en cuenta que no siempre se traducen en mejoras significativas desde el punto de vista de la seguridad.
 
